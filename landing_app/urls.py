@@ -1,6 +1,8 @@
 from django.urls import path
-from landing_app.views import Index
+from landing_app.views import Index, login, register
 urlpatterns = [
-    path('', Index.as_view(), name='index' ),
-    
+    path('', Index, name='index' ),
+    path('register/', register, name='register'),
+    path('login/', login, name='login')
+
 ]
