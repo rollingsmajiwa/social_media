@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login as auth_login
 
 # Create your views here.
 def Index(request):
@@ -16,18 +16,18 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # log in the user after signup
+            auth_login(request, user)  # log in the user after signup
             return redirect('/')
     else:
         form = UserCreationForm()
     
     return render(request, 'landing/register.html', {'form': form})
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid:
+        if form.is_valid():
             user = form.get_user()
-            login(request, user)
+            auth_login(request, user)
             return redirect('/')
     else:
         form = AuthenticationForm()
