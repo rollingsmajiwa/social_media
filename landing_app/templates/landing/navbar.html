@@ -24,7 +24,7 @@
                     <span class="text-sm font-medium text-gray-300 hidden sm:inline">
                         Welcome, <span class="text-blue-400 font-semibold">{{ user.username }}</span>
                     </span>
-                    <a href="{% url 'index' %}" class="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md transition">
+                    <a href="{% url 'post_lists' %}" class="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md transition">
                         Feed
                     </a>
                     <form method="post" action="{% url 'logout' %}" class="inline">
