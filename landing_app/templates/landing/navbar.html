@@ -32,9 +32,17 @@
                     <a href="{% url 'post_lists' %}" class="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md transition">
                         Feed
                     </a>
-                    <a href="{% url 'post_lists' %}" class="px-3 h-10 w-10 flex justify-center items-center  py-1 text-xs font-medium text-gray-800 bg-gray-100 rounded-full transition">
-                        Profile
-                    </a>
+                    <a href="{% url 'profile_view' user.id %}" class="flex items-center hover:opacity-80 transition" title="View Profile">
+                    {% if user.profile.profile_pic %}
+                        <img src="{{ user.profile.profile_pic.url }}" 
+                            alt="{{ user.username }}" 
+                            class="w-9 h-9 rounded-full object-cover border-2 border-blue-500 shadow-sm">
+                    {% else %}
+            <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-semibold flex items-center justify-center text-sm border-2 border-blue-400">
+            {{ user.username|first|upper }}
+        </div>
+    {% endif %}
+</a>
                     <form method="post" action="{% url 'logout' %}" class="inline">
                         {% csrf_token %}
                         <button type="submit" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-white bg-red-700 hover:bg-red-600 rounded-lg transition">

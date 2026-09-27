@@ -1,0 +1,34 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10 max-w-md bg-gray-800 text-white p-6 rounded-xl shadow-lg border border-gray-700">
+    <div class="flex flex-col items-center">
+        <!-- Profile Picture -->
+        {% if profile_user.profile.profile_pic %}
+            <img src="{{ profile_user.profile.profile_pic.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-md">
+        {% else %}
+            <div class="w-32 h-32 rounded-full bg-gray-600 flex items-center justify-center text-2xl font-bold border-4 border-blue-500">
+                {{ profile_user.username|first|upper }}
+            </div>
+        {% endif %}
+
+        <!-- User Name & Details -->
+        <h2 class="mt-4 text-2xl font-bold">
+            {% if profile_user.get_full_name %}
+                {{ profile_user.get_full_name }}
+            {% else %}
+                {{ profile_user.username }}
+            {% endif %}
+        </h2>
+        <p class="text-sm text-gray-400">@{{ profile_user.username }}</p>
+        <p class="text-sm text-gray-300 mt-1">{{ profile_user.email }}</p>
+
+        <!-- Edit Profile Option for Author -->
+        {% if request.user == profile_user %}
+    <a href="{% url 'edit_profile_view' profile_user.id %}" class="mt-6 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition">
+        Edit Profile
+    </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
