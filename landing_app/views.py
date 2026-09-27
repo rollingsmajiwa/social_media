@@ -17,7 +17,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)  # log in the user after signup
-            return redirect('/')
+            return redirect('login')
     else:
         form = UserCreationForm()
     
@@ -28,7 +28,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            return redirect('/')
+            return redirect('post_lists')
     else:
         form = AuthenticationForm()
     return render(request, 'landing/login.html', {'form': form})
