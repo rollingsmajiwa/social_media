@@ -21,3 +21,10 @@ def post_lists(request):
 
     context = {"form": form, "posts": posts}
     return render(request, 'social/post.html', context)
+
+def post_details(request, pk):
+    post = Post.objects.get(pk=pk)
+    context = {
+        "post": post
+    }
+    return render(request, "social/post_details.html", context)
